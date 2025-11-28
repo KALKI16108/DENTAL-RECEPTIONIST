@@ -1,0 +1,17 @@
+{
+  "name": "ai-dental-receptionist-landing",
+  "version": "1.0.0",
+  "description": "Landing page for AI Dental Receptionist SaaS",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "razorpay": "^2.9.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.x"
+  }
+}
+

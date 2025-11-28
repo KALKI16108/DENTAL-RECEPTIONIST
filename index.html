@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="24/7 AI Dental Receptionist for your clinic. Never miss a patient again. Natural voice, instant booking, multilingual support.">
+    <title>AI Dental Receptionist - 24/7 Phone Receptionist for Dentists</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-blue {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+        .animate-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes waveform {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+        .waveform-bar {
+            transition: height 0.3s ease, background-color 0.3s ease;
+            animation: waveform 1.5s ease-in-out infinite;
+        }
+        .waveform-bar:nth-child(1) { animation-delay: 0s; }
+        .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+        .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+        .waveform-bar:nth-child(6) { animation-delay: 0.5s; }
+        .waveform-bar:nth-child(7) { animation-delay: 0.6s; }
+        .waveform-bar:nth-child(8) { animation-delay: 0.7s; }
+        .waveform-bar:nth-child(9) { animation-delay: 0.8s; }
+        .waveform-bar:nth-child(10) { animation-delay: 0.9s; }
+        .waveform-bar:nth-child(11) { animation-delay: 1s; }
+        .waveform-bar:nth-child(12) { animation-delay: 1.1s; }
+        .waveform-bar:nth-child(13) { animation-delay: 1.2s; }
+        #progressHandle {
+            transition: left 0.1s ease;
+        }
+        #progressBar {
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    
+    <!-- HERO SECTION -->
+    <section class="relative bg-gradient-to-br from-blue-50 to-white py-20 lg:py-32 overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        24/7 AI Dental Receptionist<br>
+                        <span class="gradient-text">for Your Clinic</span>
+                    </h1>
+                    <p class="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed">
+                        Never miss a patient again. Natural voice, instant booking, multilingual support.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#demo" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg">
+                            Try Demo
+                        </a>
+                        <a href="https://wa.me/+919930744723" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg">
+                            <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center lg:justify-end">
+                    <div class="w-full max-w-md h-80 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl shadow-xl flex items-center justify-center relative overflow-hidden">
+                        <!-- Phone with AI elements -->
+                        <div class="text-center p-8 relative z-10">
+                            <div class="relative inline-block mb-4">
+                                <i class="fas fa-phone-alt text-5xl text-blue-600 mb-2"></i>
+                                <!-- Voice waves -->
+                                <div class="absolute -top-2 -right-2 w-16 h-16 border-2 border-blue-400 rounded-full opacity-50 animate-pulse"></div>
+                                <div class="absolute -top-4 -right-4 w-20 h-20 border-2 border-blue-300 rounded-full opacity-30 animate-pulse" style="animation-delay: 0.5s;"></div>
+                            </div>
+                            <div class="flex items-center justify-center gap-2 mb-2">
+                                <i class="fas fa-clock text-blue-600"></i>
+                                <span class="text-blue-700 font-bold text-lg">24/7</span>
+                            </div>
+                            <div class="flex items-center justify-center gap-1 text-blue-600">
+                                <i class="fas fa-microphone-alt text-sm"></i>
+                                <span class="text-sm font-medium">AI Receptionist</span>
+                            </div>
+                        </div>
+                        <!-- Background decorative elements -->
+                        <div class="absolute top-4 right-4 w-20 h-20 bg-blue-300 rounded-full opacity-20"></div>
+                        <div class="absolute bottom-4 left-4 w-16 h-16 bg-blue-400 rounded-full opacity-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAIN-SOLUTION SECTION -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
+                        The Problem: <span class="text-red-600">Lost Patients</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                        When patients call and no one answers, they move on. Simple as that.
+                    </p>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg mb-6">
+                        <p class="text-2xl font-bold text-red-600 mb-2">30-35%</p>
+                        <p class="text-gray-700">of new patients are lost due to missed calls</p>
+                    </div>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        After-hours calls, lunch breaks, busy periods—every missed call is a lost opportunity.
+                    </p>
+                </div>
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
+                        The Solution: <span class="text-blue-600">Always On</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                        An AI receptionist that answers every call, books appointments instantly, and never takes a break.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-6">
+                        <p class="text-2xl font-bold text-blue-600 mb-2">24/7</p>
+                        <p class="text-gray-700">availability means zero missed opportunities</p>
+                    </div>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Natural conversations, instant booking, and multilingual support—all automated, all the time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE DEMO SECTION -->
+    <section id="demo" class="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Hear It in 15 Seconds</h2>
+                <p class="text-lg text-gray-600">Experience our natural AI voice receptionist</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+                    <h3 class="text-xl font-bold mb-6 text-center">Listen to Demo</h3>
+                    
+                    <!-- Custom Audio Player -->
+                    <div class="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-50 rounded-2xl p-8 mb-6 relative overflow-hidden">
+                        <!-- Decorative background waves -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute bottom-0 left-0 w-full h-20 bg-blue-400 rounded-t-full transform translate-y-10"></div>
+                            <div class="absolute bottom-0 left-0 w-full h-16 bg-indigo-400 rounded-t-full transform translate-y-16"></div>
+                        </div>
+                        
+                        <!-- Audio element (hidden) -->
+                        <audio id="demoAudio" preload="metadata">
+                            <source src="demo-audio.mp3" type="audio/mpeg">
+                            <source src="demo-audio.ogg" type="audio/ogg">
+                        </audio>
+                        
+                        <div class="relative z-10">
+                            <!-- Play/Pause Button -->
+                            <div class="flex justify-center mb-6">
+                                <button id="playPauseBtn" class="w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-110 group">
+                                    <i id="playIcon" class="fas fa-play text-white text-2xl ml-1"></i>
+                                    <i id="pauseIcon" class="fas fa-pause text-white text-2xl hidden"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Progress Bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                                    <span id="currentTime">0:00</span>
+                                    <span id="duration">0:00</span>
+                                </div>
+                                <div class="relative h-2 bg-gray-200 rounded-full overflow-hidden cursor-pointer" id="progressContainer">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full" id="progressBar" style="width: 0%"></div>
+                                    <div class="absolute h-2 w-2 bg-white rounded-full shadow-lg transform -translate-y-1/2 top-1/2" id="progressHandle" style="left: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Audio Waveform Visualization -->
+                            <div class="flex items-end justify-center gap-1 h-12 mb-4" id="waveform">
+                                <div class="w-1 bg-blue-400 rounded-full waveform-bar" style="height: 20%"></div>
+                                <div class="w-1 bg-blue-500 rounded-full waveform-bar" style="height: 40%"></div>
+                                <div class="w-1 bg-indigo-500 rounded-full waveform-bar" style="height: 60%"></div>
+                                <div class="w-1 bg-blue-600 rounded-full waveform-bar" style="height: 80%"></div>
+                                <div class="w-1 bg-indigo-600 rounded-full waveform-bar" style="height: 100%"></div>
+                                <div class="w-1 bg-blue-500 rounded-full waveform-bar" style="height: 70%"></div>
+                                <div class="w-1 bg-indigo-500 rounded-full waveform-bar" style="height: 50%"></div>
+                                <div class="w-1 bg-blue-400 rounded-full waveform-bar" style="height: 30%"></div>
+                                <div class="w-1 bg-blue-500 rounded-full waveform-bar" style="height: 60%"></div>
+                                <div class="w-1 bg-indigo-600 rounded-full waveform-bar" style="height: 90%"></div>
+                                <div class="w-1 bg-blue-600 rounded-full waveform-bar" style="height: 75%"></div>
+                                <div class="w-1 bg-indigo-500 rounded-full waveform-bar" style="height: 45%"></div>
+                                <div class="w-1 bg-blue-400 rounded-full waveform-bar" style="height: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center text-sm text-gray-600">
+                        <p><i class="fas fa-info-circle mr-2 text-blue-500"></i>15-second sample of our AI receptionist</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200 flex flex-col items-center justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-center">Scan to Listen</h3>
+                    <div id="qrcode" class="bg-white p-4 rounded-lg mb-4 flex items-center justify-center min-h-[200px]">
+                        <!-- QR code will be generated here -->
+                    </div>
+                    <p class="text-gray-600 text-center text-sm">Scan with your phone to hear the demo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Everything You Need</h2>
+                <p class="text-lg text-gray-600">Built specifically for dental clinics</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-microphone-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Natural Mumbai-Style Voice</h3>
+                    <p class="text-gray-700">Warm, professional voice that patients trust instantly.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Appointment Booking Automation</h3>
+                    <p class="text-gray-700">Instant booking directly into your calendar system.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Multilingual Support</h3>
+                    <p class="text-gray-700">English, Hindi, Marathi—speaks your patients' language.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bell text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Reminders + Follow-ups</h3>
+                    <p class="text-gray-700">Automatic appointment reminders reduce no-shows.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Works 24/7</h3>
+                    <p class="text-gray-700">Never miss a call, even on holidays and weekends.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Zero Training, Zero Salary</h3>
+                    <p class="text-gray-700">Setup in 5 minutes. No hiring, no training costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Simple Pricing. No Contracts.</h2>
+                <p class="text-lg text-gray-600">Choose the plan that fits your clinic</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">₹999</span>
+                        <span class="text-gray-600">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">200 calls per month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Appointment booking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Multilingual support</span>
+                        </li>
+                    </ul>
+                    <button onclick="openPaymentModal('basic', 999)" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold transition-colors">
+                        Start Now
+                    </button>
+                </div>
+                <!-- Pro Plan -->
+                <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 border-2 border-blue-500 transform scale-105">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-white">Pro</h3>
+                        <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-white">₹1,999</span>
+                        <span class="text-blue-100">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-300 mr-3 mt-1"></i>
+                            <span class="text-white">Unlimited calls</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-300 mr-3 mt-1"></i>
+                            <span class="text-white">Follow-ups</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-300 mr-3 mt-1"></i>
+                            <span class="text-white">Reminder automation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-300 mr-3 mt-1"></i>
+                            <span class="text-white">Priority voice quality</span>
+                        </li>
+                    </ul>
+                    <button onclick="openPaymentModal('pro', 1999)" class="w-full bg-white hover:bg-gray-100 text-blue-600 py-3 rounded-lg font-semibold transition-colors">
+                        Start Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Why Dentists Choose Us</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-arrow-down text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Reduced Missed Calls</h3>
+                        <p class="text-gray-600">Answer every call, every time.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-calendar-plus text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">More Appointments Booked</h3>
+                        <p class="text-gray-600">Convert more calls into confirmed bookings.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-smile text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Patients Feel More Comfortable</h3>
+                        <p class="text-gray-600">Natural conversations build trust instantly.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-calendar-alt text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Works Even on Holidays</h3>
+                        <p class="text-gray-600">Never close. Always available for your patients.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-rocket text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Setup in 5 Minutes</h3>
+                        <p class="text-gray-600">Get started today. No technical skills needed.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 bg-gray-50 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-rupee-sign text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Save on Staff Costs</h3>
+                        <p class="text-gray-600">No salary, no training, no sick days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">What Dentists Say</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Dr. Priya Sharma</h4>
+                            <p class="text-sm text-gray-600">Mumbai Dental Care</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "We were losing 3-4 patients a week to missed calls. Now every call gets answered, and bookings are up 40%. Best investment we made this year."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Dr. Rajesh Patel</h4>
+                            <p class="text-sm text-gray-600">Smile Clinic, Pune</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "The multilingual support is a game-changer. Patients can speak in Hindi or Marathi, and the AI handles it perfectly. Setup took literally 5 minutes."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Dr. Anjali Desai</h4>
+                            <p class="text-sm text-gray-600">Family Dental, Navi Mumbai</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "We don't have a full-time receptionist, so this was perfect. The voice sounds so natural, patients don't even realize it's AI. Highly recommend."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                Ready for a receptionist that never gets tired?
+            </h2>
+            <p class="text-xl text-blue-100 mb-10">
+                Start answering every call today. No contracts, cancel anytime.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openPaymentModal('basic', 999)" class="bg-white hover:bg-gray-100 text-blue-600 px-10 py-4 rounded-lg font-bold text-lg transition-colors shadow-xl">
+                    Start for ₹999
+                </button>
+                <a href="https://wa.me/919876543210" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-lg font-bold text-lg transition-colors shadow-xl">
+                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-bold text-xl mb-4">AI Dental Receptionist</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Your clinic. Always reachable.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <i class="fas fa-phone mr-2 text-blue-400"></i>
+                            <a href="tel:+919930744723" class="hover:text-white">+91 99307 44723</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp mr-2 text-green-400"></i>
+                            <a href="https://wa.me/+9930744723" target="_blank" class="hover:text-white">WhatsApp Us</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope mr-2 text-blue-400"></i>
+                            <a href="mailto:hello@aidentalreceptionist.com" class="hover:text-white">hello@aidentalreceptionist.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#demo" class="hover:text-white">Demo</a></li>
+                        <li><a href="#features" class="hover:text-white">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2024 AI Dental Receptionist. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-6">Complete Your Subscription</h3>
+            <form id="paymentForm" onsubmit="handlePayment(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Clinic Name</label>
+                    <input type="text" id="clinicName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Your Name</label>
+                    <input type="text" id="contactName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Email</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Phone</label>
+                    <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="mb-6 p-4 bg-blue-50 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">Plan:</span>
+                        <span id="selectedPlan" class="font-bold text-blue-600"></span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-semibold">Amount:</span>
+                        <span id="selectedAmount" class="font-bold text-blue-600 text-xl">₹0</span>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                    Proceed to Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Payment configuration
+        const RAZORPAY_KEY_ID = 'YOUR_RAZORPAY_KEY_ID'; // Replace with your Razorpay Key ID
+        
+        let selectedPlan = '';
+        let selectedAmount = 0;
+
+        // Open payment modal
+        function openPaymentModal(plan, amount) {
+            selectedPlan = plan;
+            selectedAmount = amount;
+            document.getElementById('selectedPlan').textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+            document.getElementById('selectedAmount').textContent = '₹' + amount.toLocaleString('en-IN');
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+
+        // Close payment modal
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+            document.getElementById('paymentForm').reset();
+        }
+
+        // Handle payment
+        async function handlePayment(event) {
+            event.preventDefault();
+            
+            const clinicName = document.getElementById('clinicName').value;
+            const contactName = document.getElementById('contactName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Create order on your backend first (you need to implement this)
+            // For now, we'll use Razorpay's direct checkout
+            // IMPORTANT: In production, create order on your backend for security
+            
+            const options = {
+                key: RAZORPAY_KEY_ID,
+                amount: selectedAmount * 100, // Amount in paise
+                currency: 'INR',
+                name: 'AI Dental Receptionist',
+                description: `${selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)} Plan - Monthly Subscription`,
+                image: '', // Add your logo URL
+                prefill: {
+                    name: contactName,
+                    email: email,
+                    contact: phone
+                },
+                notes: {
+                    clinic_name: clinicName,
+                    plan: selectedPlan
+                },
+                theme: {
+                    color: '#0284c7'
+                },
+                handler: function (response) {
+                    // Payment successful
+                    // Send payment details to your backend for verification
+                    alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+                    console.log('Payment Response:', response);
+                    
+                    // Send to your backend
+                    fetch('/api/verify-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            clinic_name: clinicName,
+                            contact_name: contactName,
+                            email: email,
+                            phone: phone,
+                            plan: selectedPlan,
+                            amount: selectedAmount
+                        })
+                    }).then(res => res.json())
+                      .then(data => {
+                          if (data.success) {
+                              alert('Subscription activated! We will contact you shortly.');
+                              closePaymentModal();
+                          }
+                      })
+                      .catch(err => {
+                          console.error('Error:', err);
+                          alert('Payment received. We will verify and contact you shortly.');
+                      });
+                },
+                modal: {
+                    ondismiss: function() {
+                        console.log('Payment cancelled');
+                    }
+                }
+            };
+
+            const razorpay = new Razorpay(options);
+            razorpay.open();
+        }
+
+        // Custom Audio Player Controls
+        const audio = document.getElementById('demoAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const progressBar = document.getElementById('progressBar');
+        const progressHandle = document.getElementById('progressHandle');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const waveformBars = document.querySelectorAll('.waveform-bar');
+
+        // Format time
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = progress + '%';
+                progressHandle.style.left = progress + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        }
+
+        // Animate waveform
+        let waveformInterval;
+        function animateWaveform() {
+            if (!audio.paused) {
+                waveformBars.forEach((bar, index) => {
+                    const delay = index * 0.1;
+                    const height = 20 + Math.random() * 80;
+                    setTimeout(() => {
+                        if (!audio.paused) {
+                            bar.style.height = height + '%';
+                            bar.style.transition = 'height 0.3s ease';
+                        }
+                    }, delay);
+                });
+            }
+        }
+        
+        function startWaveformAnimation() {
+            if (waveformInterval) clearInterval(waveformInterval);
+            waveformInterval = setInterval(() => {
+                if (!audio.paused) {
+                    animateWaveform();
+                } else {
+                    clearInterval(waveformInterval);
+                }
+            }, 300);
+        }
+        
+        function stopWaveformAnimation() {
+            if (waveformInterval) clearInterval(waveformInterval);
+            waveformBars.forEach(bar => {
+                bar.style.height = '20%';
+            });
+        }
+
+        // Play/Pause toggle
+        playPauseBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                startWaveformAnimation();
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                stopWaveformAnimation();
+            }
+        });
+
+        // Update duration when loaded
+        audio.addEventListener('loadedmetadata', function() {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        // Update progress
+        audio.addEventListener('timeupdate', updateProgress);
+
+        // Reset when ended
+        audio.addEventListener('ended', function() {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            progressBar.style.width = '0%';
+            progressHandle.style.left = '0%';
+            currentTimeEl.textContent = '0:00';
+        });
+
+        // Seek on progress bar click
+        progressContainer.addEventListener('click', function(e) {
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pos * audio.duration;
+            updateProgress();
+        });
+
+        // Generate QR Code for demo audio
+        function generateQRCode() {
+            // Option 1: Link to audio file directly (uncomment and add your audio URL)
+            // const audioUrl = 'https://yourdomain.com/demo-audio.mp3';
+            
+            // Option 2: Link to demo page or current page with demo section
+            const demoUrl = window.location.origin + window.location.pathname + '#demo';
+            
+            // Option 3: Link to external demo page (uncomment and customize)
+            // const demoUrl = 'https://yourdomain.com/demo';
+            
+            // Clear existing QR code
+            document.getElementById('qrcode').innerHTML = '';
+            
+            // Generate QR code
+            new QRCode(document.getElementById('qrcode'), {
+                text: demoUrl,
+                width: 200,
+                height: 200,
+                colorDark: '#0284c7',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Generate QR code when page loads
+        window.addEventListener('load', function() {
+            if (typeof QRCode !== 'undefined') {
+                generateQRCode();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
