@@ -775,24 +775,34 @@
 
             // Play/Pause toggle
             if (playPauseBtn) {
-                playPauseBtn.addEventListener('click', function() {
+                playPauseBtn.addEventListener('click', async function() {
                     if (!audio) return;
                     
-                    const playPromise = audio.paused ? audio.play() : Promise.resolve();
+                    // Check if audio source is available
+                    if (!audio.src || audio.src === window.location.href) {
+                        console.error('Audio source not available');
+                        if (currentTimeEl) currentTimeEl.textContent = 'Audio file not found';
+                        return;
+                    }
                     
-                    if (audio.paused) {
-                        playPromise.then(() => {
+                    try {
+                        if (audio.paused) {
+                            await audio.play();
                             if (playIcon) playIcon.classList.add('hidden');
                             if (pauseIcon) pauseIcon.classList.remove('hidden');
                             startWaveformAnimation();
-                        }).catch(error => {
-                            console.error('Error playing audio:', error);
-                        });
-                    } else {
-                        audio.pause();
+                        } else {
+                            audio.pause();
+                            if (playIcon) playIcon.classList.remove('hidden');
+                            if (pauseIcon) pauseIcon.classList.add('hidden');
+                            stopWaveformAnimation();
+                        }
+                    } catch (error) {
+                        console.error('Error playing audio:', error);
+                        if (currentTimeEl) currentTimeEl.textContent = 'Error: ' + error.message;
+                        // Reset UI
                         if (playIcon) playIcon.classList.remove('hidden');
                         if (pauseIcon) pauseIcon.classList.add('hidden');
-                        stopWaveformAnimation();
                     }
                 });
             }
