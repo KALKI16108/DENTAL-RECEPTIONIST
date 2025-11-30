@@ -169,8 +169,8 @@
                         
                         <!-- Audio element (hidden) -->
                         <audio id="demoAudio" preload="metadata">
-                            <source src="demo-audio.mp3" type="audio/mpeg">
-                            <source src="demo-audio.ogg" type="audio/ogg">
+                            <source src="/demo-audio.mp3" type="audio/mpeg">
+                            <source src="/demo-audio.ogg" type="audio/ogg">
                         </audio>
                         
                         <div class="relative z-10">
@@ -779,9 +779,21 @@
                     if (!audio) return;
                     
                     // Check if audio source is available
-                    if (!audio.src || audio.src === window.location.href) {
-                        console.error('Audio source not available');
-                        if (currentTimeEl) currentTimeEl.textContent = 'Audio file not found';
+                    if (!audio.src || audio.readyState === 0) {
+                        console.error('Audio source not available. ReadyState:', audio.readyState);
+                        console.error('Audio src:', audio.src);
+                        // Try to reload
+                        if (!audio.src) {
+                            audio.src = '/demo-audio.mp3';
+                            audio.load();
+                        }
+                        // Wait a bit and check again
+                        setTimeout(() => {
+                            if (audio.readyState === 0) {
+                                if (currentTimeEl) currentTimeEl.textContent = 'Audio file not found';
+                                console.error('Audio still not loaded after retry');
+                            }
+                        }, 500);
                         return;
                     }
                     
@@ -826,8 +838,37 @@
             // Try to load audio
             audio.load();
             
-            // Log audio source
-            console.log('Audio source:', audio.src);
+            // Set audio source - try both relative and absolute paths
+            function setAudioSource() {
+                // Try absolute path first (for production)
+                const absolutePath = '/demo-audio.mp3';
+                // Try relative path (for local development)
+                const relativePath = 'demo-audio.mp3';
+                
+                // Check which path works
+                const testAudio = new Audio();
+                testAudio.src = absolutePath;
+                
+                audio.src = absolutePath;
+                audio.load();
+                
+                console.log('Audio source set to:', audio.src);
+                console.log('Full URL:', new URL(audio.src, window.location.origin).href);
+            }
+            
+            setAudioSource();
+            
+            // Check if audio source is valid after a short delay
+            setTimeout(() => {
+                console.log('Audio source:', audio.src);
+                console.log('Audio readyState:', audio.readyState);
+                if (audio.readyState === 0) {
+                    console.warn('Audio not loaded. Trying relative path...');
+                    // Try relative path as fallback
+                    audio.src = 'demo-audio.mp3';
+                    audio.load();
+                }
+            }, 500);
 
             // Update progress
             audio.addEventListener('timeupdate', updateProgress);
