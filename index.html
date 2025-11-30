@@ -693,56 +693,59 @@
             razorpay.open();
         }
 
-        // Custom Audio Player Controls
-        const audio = document.getElementById('demoAudio');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        const progressBar = document.getElementById('progressBar');
-        const progressHandle = document.getElementById('progressHandle');
-        const progressContainer = document.getElementById('progressContainer');
-        const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
-        const waveformBars = document.querySelectorAll('.waveform-bar');
-
-        // Format time
+        // Custom Audio Player Controls - Wait for DOM to load
+        let audio, playPauseBtn, playIcon, pauseIcon, progressBar, progressHandle, progressContainer, currentTimeEl, durationEl, waveformBars;
+        
+        function initAudioPlayer() {
+            audio = document.getElementById('demoAudio');
+            playPauseBtn = document.getElementById('playPauseBtn');
+            playIcon = document.getElementById('playIcon');
+            pauseIcon = document.getElementById('pauseIcon');
+            progressBar = document.getElementById('progressBar');
+            progressHandle = document.getElementById('progressHandle');
+            progressContainer = document.getElementById('progressContainer');
+            currentTimeEl = document.getElementById('currentTime');
+            durationEl = document.getElementById('duration');
+            waveformBars = document.querySelectorAll('.waveform-bar');
+            
+            if (!audio || !playPauseBtn) {
+                console.error('Audio player elements not found');
+                return;
+            }
+            
+            setupAudioPlayer();
+        }
+        
+        // Format time helper
         function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return '0:00';
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Update progress bar
-        function updateProgress() {
-            if (audio.duration) {
-                const progress = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = progress + '%';
-                progressHandle.style.left = progress + '%';
-                currentTimeEl.textContent = formatTime(audio.currentTime);
-            }
-        }
-
-        // Animate waveform
+        // Waveform animation variables
         let waveformInterval;
+        
+        // Animate waveform
         function animateWaveform() {
-            if (!audio.paused) {
-                waveformBars.forEach((bar, index) => {
-                    const delay = index * 0.1;
-                    const height = 20 + Math.random() * 80;
-                    setTimeout(() => {
-                        if (!audio.paused) {
-                            bar.style.height = height + '%';
-                            bar.style.transition = 'height 0.3s ease';
-                        }
-                    }, delay);
-                });
-            }
+            if (!audio || audio.paused || !waveformBars) return;
+            waveformBars.forEach((bar, index) => {
+                const delay = index * 0.1;
+                const height = 20 + Math.random() * 80;
+                setTimeout(() => {
+                    if (!audio.paused && bar) {
+                        bar.style.height = height + '%';
+                        bar.style.transition = 'height 0.3s ease';
+                    }
+                }, delay);
+            });
         }
         
         function startWaveformAnimation() {
             if (waveformInterval) clearInterval(waveformInterval);
             waveformInterval = setInterval(() => {
-                if (!audio.paused) {
+                if (audio && !audio.paused) {
                     animateWaveform();
                 } else {
                     clearInterval(waveformInterval);
@@ -752,50 +755,102 @@
         
         function stopWaveformAnimation() {
             if (waveformInterval) clearInterval(waveformInterval);
-            waveformBars.forEach(bar => {
-                bar.style.height = '20%';
-            });
-        }
-
-        // Play/Pause toggle
-        playPauseBtn.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                startWaveformAnimation();
-            } else {
-                audio.pause();
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                stopWaveformAnimation();
+            if (waveformBars) {
+                waveformBars.forEach(bar => {
+                    if (bar) bar.style.height = '20%';
+                });
             }
-        });
+        }
+        
+        function setupAudioPlayer() {
+            // Update progress bar
+            function updateProgress() {
+                if (!audio || !audio.duration || isNaN(audio.duration)) return;
+                
+                const progress = (audio.currentTime / audio.duration) * 100;
+                if (progressBar) progressBar.style.width = progress + '%';
+                if (progressHandle) progressHandle.style.left = progress + '%';
+                if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
 
-        // Update duration when loaded
-        audio.addEventListener('loadedmetadata', function() {
-            durationEl.textContent = formatTime(audio.duration);
-        });
+            // Play/Pause toggle
+            if (playPauseBtn) {
+                playPauseBtn.addEventListener('click', function() {
+                    if (!audio) return;
+                    
+                    const playPromise = audio.paused ? audio.play() : Promise.resolve();
+                    
+                    if (audio.paused) {
+                        playPromise.then(() => {
+                            if (playIcon) playIcon.classList.add('hidden');
+                            if (pauseIcon) pauseIcon.classList.remove('hidden');
+                            startWaveformAnimation();
+                        }).catch(error => {
+                            console.error('Error playing audio:', error);
+                        });
+                    } else {
+                        audio.pause();
+                        if (playIcon) playIcon.classList.remove('hidden');
+                        if (pauseIcon) pauseIcon.classList.add('hidden');
+                        stopWaveformAnimation();
+                    }
+                });
+            }
 
-        // Update progress
-        audio.addEventListener('timeupdate', updateProgress);
+            // Update duration when loaded
+            audio.addEventListener('loadedmetadata', function() {
+                console.log('Audio metadata loaded. Duration:', audio.duration);
+                if (audio.duration && !isNaN(audio.duration) && durationEl) {
+                    durationEl.textContent = formatTime(audio.duration);
+                }
+            });
 
-        // Reset when ended
-        audio.addEventListener('ended', function() {
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
-            progressBar.style.width = '0%';
-            progressHandle.style.left = '0%';
-            currentTimeEl.textContent = '0:00';
-        });
+            // Handle audio load errors
+            audio.addEventListener('error', function(e) {
+                console.error('Audio load error:', e);
+                console.error('Audio src:', audio.src);
+                if (currentTimeEl) currentTimeEl.textContent = 'Error loading audio';
+                if (durationEl) durationEl.textContent = '0:00';
+            });
+            
+            // Try to load audio
+            audio.load();
+            
+            // Log audio source
+            console.log('Audio source:', audio.src);
 
-        // Seek on progress bar click
-        progressContainer.addEventListener('click', function(e) {
-            const rect = progressContainer.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = pos * audio.duration;
-            updateProgress();
-        });
+            // Update progress
+            audio.addEventListener('timeupdate', updateProgress);
+
+            // Reset when ended
+            audio.addEventListener('ended', function() {
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+                if (progressBar) progressBar.style.width = '0%';
+                if (progressHandle) progressHandle.style.left = '0%';
+                if (currentTimeEl) currentTimeEl.textContent = '0:00';
+                stopWaveformAnimation();
+            });
+
+            // Seek on progress bar click
+            if (progressContainer) {
+                progressContainer.addEventListener('click', function(e) {
+                    if (audio.duration) {
+                        const rect = progressContainer.getBoundingClientRect();
+                        const pos = (e.clientX - rect.left) / rect.width;
+                        audio.currentTime = pos * audio.duration;
+                        updateProgress();
+                    }
+                });
+            }
+        }
+        
+        // Initialize audio player when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAudioPlayer);
+        } else {
+            initAudioPlayer();
+        }
 
         // Generate QR Code for demo audio
         function generateQRCode() {
